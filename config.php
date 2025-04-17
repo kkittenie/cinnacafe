@@ -3,7 +3,7 @@
 $host = "localhost";
 $user = "root";
 $password = "";
-$database = "cinna_cafe";
+$database = "users_db";
 
 $conn = new mysqli( $host, $user, $password, $database );
 
