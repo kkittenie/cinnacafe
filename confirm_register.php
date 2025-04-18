@@ -67,6 +67,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .buttons {
             display: flex;
             justify-content: space-between;
+            transition: background-color 0.3s ease, transform 0.2s;
+            font-family: "Poppins", serif;
+            
+        }
+        .buttons:hover {
+            transform: translateY(-2px);
         }
         button {
             padding: 12px 20px;
@@ -75,7 +81,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             border-radius: 5px;
             cursor: pointer;
             font-weight: 600;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease
+
         }
         .confirm {
             background-color:rgb(202, 213, 218);
@@ -87,6 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         button:hover {
             opacity: 0.9;
+            transform: translateY(-2px);
         }
     </style>
 </head>

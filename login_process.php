@@ -28,12 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 header("Location: dashboard.php");
                 exit();
             } else {
-                showAlert("Password salah. Silakan coba lagi.", "error");
+                showAlert("Password invalid. Try again.", "error");
                 header("Location: login.php");
                 exit();
             }
         } else {
-            showAlert("Username tidak ditemukan.", "error");
+            showAlert("Username invalid.", "error");
             header("Location: login.php");
             exit();
         }
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $result_check = $stmt_check->get_result();
 
         if ($result_check->num_rows > 0) {
-            showAlert("Username atau Email sudah digunakan.", "error");
+            showAlert("Username or Email already used.", "error");
             header("Location: register.php");
             exit();
         }
@@ -69,17 +69,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['name'] = $name;
             $_SESSION['username'] = $username;
             $_SESSION['email'] = $email;
-            showAlert("Registrasi berhasil! Selamat datang, " . $name . ".", "success");
+            showAlert("Registration succeed! Welcome, " . $name . ".", "success");
             header("Location: dashboard.php");
             exit();
         } else {
-            showAlert("Gagal menyimpan data: " . $stmt->error, "error");
+            showAlert("Can't save data: " . $stmt->error, "error");
             header("Location: register.php");
             exit();
         }
         $stmt->close();
     } else {
-        showAlert("Aksi tidak valid.", "error");
+        showAlert("Action invalid.", "error");
         header("Location: login.php");
         exit();
     }
