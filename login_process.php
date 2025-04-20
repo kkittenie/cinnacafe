@@ -5,6 +5,7 @@ include('functions.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = '';
+    $level = '';
     $username = trim($_POST['username']);
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'];
@@ -25,7 +26,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['user_id'] = $user['id'];
-                header("Location: dashboard.php");
+                $_SESSION['level'] = $user['level'];
+
+                switch ($user['level']) {
+                    case 'admin':
+                        header("Location: admin/admin_dashboard.php");
+                        break;
+                    case 'user':
+                        header("Location: dashboard.php");
+                        break;
+                    default:
+                        header("Location: dashboard.php");
+                        break;
+                }
                 exit();
             } else {
                 showAlert("Password salah. Silakan coba lagi.", "error");
@@ -40,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->close();
     } else if (isset($_POST['register'])) {
         $name = trim($_POST['name']);
-        // REGISTER PROCESS
+        $level = 'user'; 
 
         // Periksa apakah username atau email sudah digunakan
         $query_check = "SELECT * FROM users WHERE username = ? OR email = ?";
@@ -60,17 +73,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
         // Insert user baru
-        $query = "INSERT INTO users (name, username, email, password) VALUES (?, ?, ?, ?)";
+        $query = "INSERT INTO users (name, username, email, level, password) VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($query);
-        $stmt->bind_param("ssss", $name, $username, $email, $password_hash);
+        $stmt->bind_param("sssss", $name, $username, $email, $level, $password_hash);
 
         if ($stmt->execute()) {
             $_SESSION['user_id'] = $stmt->insert_id;
             $_SESSION['name'] = $name;
             $_SESSION['username'] = $username;
             $_SESSION['email'] = $email;
+            $_SESSION['level'] = $level;
             showAlert("Registrasi berhasil! Selamat datang, " . $name . ".", "success");
-            header("Location: dashboard.php");
+            header("Location: user_dashboard.php");
             exit();
         } else {
             showAlert("Gagal menyimpan data: " . $stmt->error, "error");

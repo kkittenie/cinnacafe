@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
     
-    if (strlen($password) < 6) {
+    if (strlen($password) < 3) {
         showAlert("Password harus terdiri dari minimal 6 karakter.", "error");
         header("Location: register.php");
         exit();
