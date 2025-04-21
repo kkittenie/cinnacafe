@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['email'] = $email;
             $_SESSION['level'] = $level;
             showAlert("Registrasi berhasil! Selamat datang, " . $name . ".", "success");
-            header("Location: user_dashboard.php");
+            header("Location: dashboard.php");
             exit();
         } else {
             showAlert("Gagal menyimpan data: " . $stmt->error, "error");
