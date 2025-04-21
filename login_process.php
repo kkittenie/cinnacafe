@@ -35,6 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     case 'user':
                         header("Location: dashboard.php");
                         break;
+                    default:
+                        header("Location: admin/admin_dashboard.php");
+                        break;
                 }
                 exit();
             } else {
