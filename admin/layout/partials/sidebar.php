@@ -36,5 +36,11 @@
         </ul>
       </div>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" href="reservation_index.php">
+        <span class="menu-title">Reservations</span>
+        <i class="mdi mdi-book-open-page-variant menu-icon"></i>
+      </a>
+    </li>
   </ul>
 </nav>

@@ -136,13 +136,15 @@ include('functions.php');
         <h2>Login</h2>
         <?php displayAlert(); ?>
         <form action="login_process.php" method="POST">
-            <input type="text" name="username" placeholder="Username" required>
+            <input type="text" name="username" placeholder="Username" required autofocus>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit" name="login">Login</button>
             <div class="link">
                 <p>Don't have an account? <a href="register.php">Register here</a></p>
+                <a href="index.php">Back to Home</a>
             </div>
         </form>
+
     </div>
 </body>
 </html>

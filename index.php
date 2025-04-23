@@ -62,6 +62,7 @@ session_start();
                     <p class="description">Welcome to our dessert paradise, where every bite tells a story and every plate sparks joy.</p>
                     <div class="buttons">
                         <a href="table_reservation.php" class="button contact-us">Book a Table!</a>
+                        <a href="check_reservation.php" class="button contact-us">Check reservations status!</a>
                     </div>
                 </div>
                 <div class="hero-image-wrapper">

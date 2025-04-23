@@ -1,5 +1,7 @@
 <?php
 session_start();
+include('functions.php'); 
+include 'config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'] ?? '';
@@ -7,6 +9,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $date = $_POST['date'] ?? '';
     $time = $_POST['time'] ?? '';
     $guests = $_POST['guests'] ?? '';
+    $created_at = date('Y-m-d');
+    $status = 'pending';
+
+    $dayOfWeek = date('w', strtotime($date));
+    
+    if ($dayOfWeek == 0) {
+        showAlert("Sorry, we are closed on Sundays. Please select another day.", "error");
+        header("Location: table_reservation.php");
+        exit();
+    }
+
+    $stmt = $conn->prepare("INSERT INTO reservations (created_at, name, phone_number, date, time, guests, status) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssss", $created_at, $name, $phone, $date, $time, $guests, $status);
+    
+    if ($stmt->execute()) {
+        showAlert('Reservation Success', 'success');
+    } else {
+        showAlert('Error: Unable to save reservation. Please try again.', 'error');
+        header("Location: table_reservation.php");
+        exit();
+    }
+    
+    $stmt->close();
+    $conn->close();
 }
 ?>
 
@@ -15,6 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Konfirmasi Reservasi</title>
+    <?php echo getAlertStyles(); ?>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Miniver&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 
@@ -95,6 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="emoji">🎉🍽️</div>
         <h1>Thanks, <?php echo htmlspecialchars($name); ?>!</h1>
         <h2>Your reservation will be processed.</h2>
+        <?php displayAlert(); ?>
         
         <div class="info">
             <p><strong>📞 Phone number:</strong> <?php echo htmlspecialchars($phone); ?></p>

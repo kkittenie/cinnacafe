@@ -63,7 +63,7 @@ include 'components/breadcrumb.php';
               <th>Username</th>
               <th>Email</th>
               <th>Role</th>
-              <th width="20%">Aksi</th>
+              <th width="20%">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -85,14 +85,14 @@ include 'components/breadcrumb.php';
               <td><?php echo $email; ?></td>
               <td><?php echo $level; ?></td>
               <td>
-                <a href="user_edit.php?action=edit&id=<?php echo $id; ?>" class="btn btn-sm btn-gradient-warning">Ubah</a>
+                <a href="user_edit.php?action=edit&id=<?php echo $id; ?>" class="btn btn-sm btn-gradient-primary">Edit</a>
                 <?php 
                   if ($id != $data_adm['id']){
                 ?>
                     <form action="user_index.php" method="GET" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this data?')">
                       <input type="hidden" name="action" value="delete">
                       <input type="hidden" name="id" value="<?php echo $id; ?>">
-                      <button type="submit" class="btn btn-sm btn-gradient-danger">Hapus</button>
+                      <button type="submit" class="btn btn-sm btn-gradient-danger">Delete</button>
                     </form>
                 <?php  
                   }

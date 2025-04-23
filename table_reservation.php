@@ -1,12 +1,13 @@
 <?php
 session_start();
+include('functions.php'); 
 ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <title>Table Reservation</title>
-    
+    <?php echo getAlertStyles(); ?>
     <style>
         /* importing fonts */
     @import url('https://fonts.googleapis.com/css2?family=Miniver&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
@@ -74,9 +75,10 @@ session_start();
 <body>
     <div class="container">
         <h2>Table Reservation</h2>
+        <?php displayAlert(); ?>
         <form action="dashboard2.php" method="POST" class="contact-form">
-            <input type="text" name="name" placeholder="Your name" class="form-input" required>
-            <input type="text" name="phone" placeholder="Your phone number" class="form-input" required>
+            <input type="text" name="name" max="255" placeholder="Your name" class="form-input" required>
+            <input type="number" name="phone" placeholder="Your phone number" class="form-input" required>
             <input type="date" name="date" placeholder="Registration date" class="form-input" required>
             <input type="time" name="time" placeholder="Registration time" class="form-input" required>
             <input type="number" name="guests" placeholder="Number of guests" class="form-input" required>
